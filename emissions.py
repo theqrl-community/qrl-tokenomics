@@ -44,7 +44,11 @@ def remaining_emission(block_number) -> Decimal:
 	return (COINS * decimal.Decimal(10 ** 9) * Decimal(-coeff * block_number).exp()).quantize(Decimal('1.'), rounding=decimal.ROUND_DOWN)
 
 def block_reward(block_number) -> Decimal:
-	return remaining_emission(block_number - 1) - remaining_emission(block_number)
+	if (block_number < 1938000):
+		return remaining_emission(block_number - 1) - remaining_emission(block_number)
+	else:
+		return (remaining_emission(block_number - 1) - remaining_emission(block_number))*Decimal(0.4)
+	
 
 def sumblocks(start, end) -> Decimal:
 	summit = 0
@@ -91,7 +95,7 @@ def sumdays(start, end) -> Decimal:
 				summit = sumall
 
 			ndays = date + datetime.timedelta(seconds=24*3600*day)
-			print("{},{}".format(ndays, (summit * decimal.Decimal(10 ** -9)).quantize(Decimal('0.000000001'), rounding=decimal.ROUND_HALF_DOWN) ))
+			print("{},{}".format(ndays.strftime('%Y-%m-%d'), (summit * decimal.Decimal(10 ** -9)).quantize(Decimal('0.000000001'), rounding=decimal.ROUND_HALF_DOWN) ))
 			summit=0
 			pass
 		pass

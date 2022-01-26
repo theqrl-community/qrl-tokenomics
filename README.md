@@ -62,3 +62,7 @@ The site [quantascan.io](https://quantascan.io) can also provide a lot of insigh
 - Rich list
 - Number of wallets, and
 - Stakers
+
+## Known issues
+
+- Due to dates being based off of a block time of 60 seconds, there ends up being a small drift due to real world conditions. In practice, that means the emission at an exact block height will be accurate, but daily emission rates should be seen more as estimates, both historically and in the future. Average drift seems to be about 1.75 days per year.
